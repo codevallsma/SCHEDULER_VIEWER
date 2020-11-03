@@ -1,6 +1,3 @@
-# coding=utf-8
-import operator
-
 import numpy as np
 from Process import Process, ProcessPriority, ProcessSRT
 from operator import attrgetter
@@ -36,9 +33,9 @@ def chooseMenu(string, beginning, end):
     while True:
         print(string)
         option = input()
-        if option <= beginning or option >= end:
+        if beginning <= option <= end:
             return option
-        print('Input not correct, just write ' + beginning + 'or' + end + '\n')
+        print ('Input not correct, just write ' + str(beginning) + ' or ' + str(end) + '\n')
 
 
 def escullAlgoritme():
@@ -61,6 +58,7 @@ def escullAlgoritme():
         srt = ShortestRemainingTime(processList, petitionTimes)
         srt.startShortestRemainingTime()
         srt.printaTemps()
+    print "File created!\n"
 
 
 if __name__ == "__main__":

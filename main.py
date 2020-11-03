@@ -52,7 +52,7 @@ def escullAlgoritme():
         # round robin
         print('Choose the quantum value: ')
         option = input()
-        processList = createClassList(data, 3)
+        processList, petitionTimes = createClassList(data, 3)
         rr = RoundRobin(option, processList)
         rr.startRoundRobin()
         rr.printaTemps()

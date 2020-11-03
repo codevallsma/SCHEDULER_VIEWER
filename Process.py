@@ -2,13 +2,13 @@ class Process(object):
     temps_Liurament = 0
     temps_Espera = 0
     temps_resposta = 0
-    start_execute_time =0
+    start_execute_time = 0
     first_time = True
 
-    def __init__(self, processName, petitonTime, cpuUsage, priority):
+    def __init__(self, processName, petitionTime, cpuUsage, priority):
         # Assign the argument to the instance's name attribute
         self.processName = processName
-        self.petitonTime = int(petitonTime)
+        self.petitionTime = int(petitionTime)
         self.cpuUsage = int(cpuUsage)
         self.remainingCpuUsage = int(cpuUsage)
         if priority != None:
@@ -17,10 +17,26 @@ class Process(object):
             self.priority = None
 
     def __lt__(self, other):
-        if self.petitonTime == other.petitonTime:
+        if self.petitionTime == other.petitionTime:
             return self.remainingCpuUsage <= other.remainingCpuUsage
         else:
-            return self.petitonTime <= other.petitonTime
+            return self.petitionTime <= other.petitionTime
 
     def __eq__(self, other):
-        return self.remainingCpuUsage == other.remainingCpuUsage and self.petitonTime == other.petitonTime
+        return self.remainingCpuUsage == other.remainingCpuUsage and self.petitionTime == other.petitionTime
+
+
+class ProcessPriority(Process):
+    def __init__(self, processName, petitionTime, cpuUsage, priority):
+        super(ProcessPriority, self).__init__(processName, petitionTime, cpuUsage, priority)
+
+    def __lt__(self, other):
+        return self.priority < other.priority
+
+
+class ProcessSRT(Process):
+    def __init__(self, processName, petitionTime, cpuUsage, priority):
+        super(ProcessSRT, self).__init__(processName, petitionTime, cpuUsage, priority)
+
+    def __lt__(self, other):
+        return self.remainingCpuUsage < other.remainingCpuUsage

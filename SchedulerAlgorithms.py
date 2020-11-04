@@ -36,7 +36,12 @@ class ShortestRemainingTimeOrPriority:
         mida = len(self.petitionTimes)
         while self.inService.empty() is False:
             currentProcess = self.inService.get()
-            timeStart = time
+            if currentProcess.petitionTime > time:
+                timeStart = currentProcess.petitionTime
+                time = currentProcess.petitionTime
+            else:
+                timeStart = time
+
             if self.processList:
                 if index < mida:
                     if time >= self.petitionTimes[index]:
@@ -114,7 +119,11 @@ class RoundRobin:
         results = []
         while self.inService.empty() is False:
             currentProcess = self.inService.get()
-            timeStart = time
+            if currentProcess.petitionTime > time:
+                timeStart = currentProcess.petitionTime
+                time = currentProcess.petitionTime
+            else:
+                timeStart = time
             print currentProcess.processName + " is in execution"
             # the process has ended?
 
@@ -123,9 +132,8 @@ class RoundRobin:
                 results.append(currentProcess)
                 time += currentProcess.remainingCpuUsage
                 if self.processList:
-                    if self.processList.__getitem__(0).petitionTime <= time:
-                        self.inService.put(self.processList.__getitem__(0))
-                        self.processList.pop(0)
+                    self.inService.put(self.processList.__getitem__(0))
+                    self.processList.pop(0)
             else:
                 # no
                 time += self.quantum

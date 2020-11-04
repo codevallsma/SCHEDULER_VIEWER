@@ -12,35 +12,36 @@ class Algorithms:
         pass
 
 
-class ShortestRemainingTime:
+class ShortestRemainingTimeOrPriority:
     inService = PriorityQueue()
     results = []
 
-    def __init__(self, processes, petitionTimes):
-        shutil.copy("Plantilla_scheduling .xlsx", "startShortestRemainingTime.xlsx")
-        self.excelPainter = ExcelPainter("startShortestRemainingTime.xlsx", 9, 2)
+    def __init__(self, processes, petitionTimes, fileName):
+        shutil.copy("Plantilla_scheduling .xlsx", fileName)
+        self.excelPainter = ExcelPainter(fileName, 9, 2)
         for pr in processes:
             self.excelPainter.saveValue(ord(pr.processName) - ord('A') + 17, 1, pr.processName)
             self.excelPainter.saveValue(ord(pr.processName) - ord('A') + 9, 1, pr.processName)
         self.processList = processes
         self.petitionTimes = petitionTimes
 
-    def startShortestRemainingTime(self):
+    def startShortestRemainingTimeOrPriority(self):
         global diferencia
         time = 0
         self.inService.put(self.processList.__getitem__(0))
         self.processList.pop(0)
+        last = self.processList.__getitem__(0)
         results = []
-        index = 0
+        index = 1
+        mida = len(self.petitionTimes)
         while self.inService.empty() is False:
             currentProcess = self.inService.get()
             timeStart = time
             if self.processList:
-                if currentProcess.first_time:
-                    index += 1
+                if index < mida:
+                    if time >= self.petitionTimes[index]:
+                        index += 1
                     diferencia = abs(time - self.petitionTimes[index])
-                else:
-                    diferencia = currentProcess.remainingCpuUsage
 
             print currentProcess.processName + " is in execution"
 
@@ -49,6 +50,10 @@ class ShortestRemainingTime:
                 # yes
                 results.append(currentProcess)
                 time += currentProcess.remainingCpuUsage
+                # has the process ended before the current next petition?
+                if time < self.petitionTimes[index]:
+                    # if so we decrement the index in order to obtain the same value in the next iteration
+                    index -= 1
                 if self.processList:
                     if self.processList.__getitem__(0).petitionTime <= time:
                         self.inService.put(self.processList.__getitem__(0))
@@ -57,6 +62,7 @@ class ShortestRemainingTime:
                 # no
                 time += diferencia
                 currentProcess.remainingCpuUsage -= diferencia
+                last = currentProcess
                 if self.processList:
                     self.inService.put(self.processList.__getitem__(0))
                     self.inService.put(currentProcess)

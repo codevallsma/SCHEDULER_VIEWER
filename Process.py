@@ -31,6 +31,8 @@ class ProcessPriority(Process):
         super(ProcessPriority, self).__init__(processName, petitionTime, cpuUsage, priority)
 
     def __lt__(self, other):
+        if self.priority == other.priority:
+            return self.processName < other.processName
         return self.priority < other.priority
 
 

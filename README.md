@@ -4,7 +4,7 @@ This program contains this three algorithms:<br>
 - Shortest Remaining time <br>
 - Preemptive with priorities <br>
 <br>
-This program lets you visualualize in an excel sheet, how the scheduler handles the processes execute time in a cpu given a quantum (<i>if you run the RoundRobin option</i>) and given the data of the processes you want.<br>
+This program lets you visualualize in an excel sheet, how the scheduler handles the processes execute time in a cpu given a quantum (<i>if you run the RoundRobin option</i>) and given the data of the processes you want.<br><br>
 
 | Process Name   |      Petition Time      |  TotalCpuTime |
 |----------|:-------------:|------:|

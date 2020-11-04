@@ -14,7 +14,7 @@ This program lets you visualualize in an excel sheet, how the scheduler handles 
 | D | 8 |   7 |
 | E | 11 |   5 |<br>
 
-If you want to compute the data from the table above, you will need to insert the data to the Data.txt just like the format below.<br>
+If you want to compute the data from the table above, you will need to insert the data to the Data.txt just like the format below.<br><br>
 A<br>
 0<br>
 6<br>
@@ -31,7 +31,7 @@ E<br>
 11<br>
 5<br>
 <br>
-If you want to compute the scheduler given priorities (<i>the lowest priority goes first</i>):
+If you want to compute the scheduler given priorities (<i>the lowest priority goes first</i>):<br>
 
 | Process Name   |      Petition Time      |   TotalCpuTime  |  Priority  |
 |----------|:-------------:|------:|------:|
@@ -41,7 +41,7 @@ If you want to compute the scheduler given priorities (<i>the lowest priority go
 | D | 6 |   4 |2 |
 | E | 8 |   2 |1 |<br>
 <br>
-If you want to calculate the scheduler with priorities, you will need to insert the data to the Data.txt just like the format below.<br>
+If you want to calculate the scheduler with priorities, you will need to insert the data to the Data.txt just like the format below.<br><br>
 A<br>
 0<br>
 5<br>

@@ -40,6 +40,7 @@ If you want to compute the scheduler given priorities (<i>the lowest priority go
 | C | 4 |   3 |1 |
 | D | 6 |   4 |2 |
 | E | 8 |   2 |1 |<br>
+<br>
 If you want to calculate the scheduler with priorities, you will need to insert the data to the Data.txt just like the format below.<br>
 A<br>
 0<br>
